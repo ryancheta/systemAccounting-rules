@@ -1,0 +1,13 @@
+{
+  "name": "systemAccounting-rules",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ryancheta/systemAccounting-rules.git",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^24.8.0"
+  },
+  "scripts": {
+     "test": "jest"
+  }
+}
