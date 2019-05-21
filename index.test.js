@@ -52,9 +52,12 @@ describe('addNinePercentSalesTax', () => {
   });
   
   test('removes initial tax objects', () => {
+    const noTaxObject = transactionItems.filter( item => {    
+      return item.name !== '9% Sales Tax'
+    })
     let initialLength = transactionItems.length
     let retArray = addNinePercentSalesTax( transactionItems )
-    let finalLength = initialLength + 1
-    expect( retArray.length ).toEqual( finalLength )
+    let finalLength = 2*initialLength - noTaxObject.length;
+    expect( noTaxObject.length ).toEqual( finalLength )
   });
 })
