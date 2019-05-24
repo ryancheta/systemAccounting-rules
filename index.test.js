@@ -51,13 +51,28 @@ describe('addNinePercentSalesTax', () => {
     expect( retArray.length ).toEqual( finalLength )
   });
   
+  test('verifies the object\'s validity', () => {
+    transactionItems.forEach( object => {
+      for( prop in object ){
+        expect(prop).not.toBeNull();
+      }
+    })
+  })
   test('removes initial tax objects', () => {
     const noTaxObject = transactionItems.filter( item => {    
-      return item.name !== '9% Sales Tax'
+    return item.name !== '9% Sales Tax'
     })
     let initialLength = transactionItems.length
-    let retArray = addNinePercentSalesTax( transactionItems )
     let finalLength = 2*initialLength - noTaxObject.length;
-    expect( noTaxObject.length ).toEqual( finalLength )
+    expect( noTaxObject.length ).toBe( finalLength )
+  });
+
+  test('checks debitor name match', () => {
+    let debitor = transactionItems.filter( name => {
+        return name.name !== '9% Sales Tax'
+    });
+    debitor.forEach( name => {
+      expect( name.author ).toBeTruthy(transactionItems.author);
+    });
   });
 })
