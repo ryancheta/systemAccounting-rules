@@ -5,7 +5,6 @@ const addNinePercentSalesTax = preTaxItems => {
   // with 1 additional "Sales Tax" object:
   var totalTax = 0.0;
   var totalQuantity = 0;
-  var retArray = [];
 
   preTaxItems = preTaxItems.filter( (item) => {
     return item.name !== CaNinePercentSalesTax;
