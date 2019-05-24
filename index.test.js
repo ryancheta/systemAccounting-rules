@@ -33,6 +33,31 @@ const transactionItems = [
     debitor: 'Joe Smith',
     creditor: 'Mary'
   },
+  {
+    name: 'Grapes',
+    price: '5',
+    quantity: '1',
+    author: 'Joe Namath',
+    debitor: 'Joe Smith',
+    creditor: 'Mary'
+  },
+
+  // {
+  //   name: '9% Sales Tax',
+  //   price: '7.02',
+  //   quantity: '10',
+  //   author: 'Joe Smith',
+  //   debitor: 'Joe Smith',
+  //   creditor: 'StateOfCalifornia'
+  // },
+  // {
+  //   name: '9% Sales Tax',
+  //   price: '7.02',
+  //   quantity: '10',
+  //   author: 'Joe Smith',
+  //   debitor: 'Joe Smith',
+  //   creditor: 'StateOfCalifornia'
+  // },
   // {
   //   name: '9% Sales Tax',
   //   price: '7.02',
@@ -43,12 +68,17 @@ const transactionItems = [
   // }
 ]
 
+function removeSalesObjects(){
+  return noSalesObjects = transactionItems.filter( object => {
+    return object.name != '9% Sales Tax'
+  })
+}
+
 describe('addNinePercentSalesTax', () => {
   test('returns +1 transactions', () => {
-    let initialLength = transactionItems.length
     let retArray = addNinePercentSalesTax( transactionItems )
-    let finalLength = initialLength + 1
-    expect( retArray.length ).toEqual( finalLength )
+    let finalLength = removeSalesObjects().length + 1 
+    expect( retArray.length ).toBe( finalLength )
   });
   
   test('verifies the object\'s validity', () => {
@@ -58,12 +88,11 @@ describe('addNinePercentSalesTax', () => {
       }
     })
   })
+  
   test('removes initial tax objects', () => {
-    const noTaxObject = transactionItems.filter( item => {    
-    return item.name !== '9% Sales Tax'
-    })
+    const noTaxObject = removeSalesObjects();
     let initialLength = transactionItems.length
-    let finalLength = 2*initialLength - noTaxObject.length;
+    let finalLength = initialLength - (initialLength - noTaxObject.length)
     expect( noTaxObject.length ).toBe( finalLength )
   });
 
