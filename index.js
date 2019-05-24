@@ -7,12 +7,8 @@ const addNinePercentSalesTax = preTaxItems => {
   var totalQuantity = 0;
   var retArray = [];
 
-  preTaxItems.forEach( item => {
-    if (item.name !== CaNinePercentSalesTax) {
-      totalTax += 0.09 * item.price * Number(item.quantity);
-      totalQuantity += Number(item.quantity);
-      retArray.push(item);
-    }
+  preTaxItems = preTaxItems.filter( (item) => {
+    return item.name !== CaNinePercentSalesTax;
   });
 
   var taxObject = {
@@ -24,7 +20,7 @@ const addNinePercentSalesTax = preTaxItems => {
     creditor: "StateOfCalifornia"
   };
 
-  return [...retArray, taxObject];
+  return [...preTaxItems, taxObject];
 };
 
 module.exports = { addNinePercentSalesTax };
